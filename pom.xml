@@ -10,7 +10,10 @@
     <name>niko-niko</name>
 
     <modules>
+        <module>niko-niko-domain</module>
+        <module>niko-niko-infrastructure</module>
         <module>niko-niko-app</module>
+        <module>niko-niko-system-tests</module>
     </modules>
 
     <repositories>
