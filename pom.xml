@@ -265,9 +265,9 @@
                 <scope>runtime</scope>
             </dependency>
             <dependency>
-                <groupId>mysql</groupId>
-                <artifactId>mysql-connector-java</artifactId>
-                <version>5.1.11</version>
+                <groupId>postgresql</groupId>
+                <artifactId>postgresql</artifactId>
+                <version>${postgresql.version}</version>
                 <scope>runtime</scope>
             </dependency>
             <dependency>
@@ -312,11 +312,13 @@
         <test.server.host>localhost</test.server.host>
         <test.server.port>8180</test.server.port>
         <test.log.file>test.log</test.log.file>
-        <test.jdbc.driverClassName>com.mysql.jdbc.Driver</test.jdbc.driverClassName>
-        <test.jdbc.url>jdbc:mysql://localhost:3306/nikoniko_test</test.jdbc.url>
+        <test.jdbc.driverClassName>org.postgresql.Driver</test.jdbc.driverClassName>
+		  <test.jdbc.url>jdbc:postgresql://localhost/nikoniko_test</test.jdbc.url>
         <test.jdbc.username>nikoniko</test.jdbc.username>
-        <test.jdbc.password></test.jdbc.password>
-        <test.hibernate.dialect>org.hibernate.dialect.MySQL5InnoDBDialect</test.hibernate.dialect>
+        <test.jdbc.password>nikoniko</test.jdbc.password>
+        <test.hibernate.dialect>org.hibernate.dialect.PostgreSQLDialect</test.hibernate.dialect>
+        
+        <postgresql.version>8.3-603.jdbc4</postgresql.version>
     </properties>
 
     <profiles>
@@ -332,13 +334,11 @@
             <properties>
                 <server.port>8080</server.port>
                 <log.file>development.log</log.file>
-                <jdbc.driverClassName>com.mysql.jdbc.Driver</jdbc.driverClassName>
-                <jdbc.url>jdbc:mysql://localhost:3306/nikoniko_dev</jdbc.url>
-                <jdbc.username>nikoniko</jdbc.username>
-                <jdbc.password>nikoniko</jdbc.password>
-                <hibernate.dialect>org.hibernate.dialect.MySQL5InnoDBDialect</hibernate.dialect>
-                <timeServer.host>localhost</timeServer.host>
-                <timeServer.port>10000</timeServer.port>
+					 <jdbc.driverClassName>org.postgresql.Driver</jdbc.driverClassName>
+					 <jdbc.url>jdbc:postgresql://localhost/nikoniko_dev</jdbc.url>
+					 <jdbc.username>nikoniko</jdbc.username>
+					 <jdbc.password>nikoniko</jdbc.password>
+					 <hibernate.dialect>org.hibernate.dialect.PostgreSQLDialect</hibernate.dialect>
             </properties>
         </profile>
         <profile>
@@ -346,13 +346,11 @@
             <properties>
                 <server.port>8280</server.port>
                 <log.file>production.log</log.file>
-                <jdbc.driverClassName>com.mysql.jdbc.Driver</jdbc.driverClassName>
-                <jdbc.url>jdbc:mysql://localhost:3306/nikoniko</jdbc.url>
-                <jdbc.username>nikoniko</jdbc.username>
-                <jdbc.password>nikoniko</jdbc.password>
-                <hibernate.dialect>org.hibernate.dialect.MySQL5InnoDBDialect</hibernate.dialect>
-                <timeServer.host>time.nist.gov</timeServer.host>
-                <timeServer.port>13</timeServer.port>
+					 <jdbc.driverClassName>org.postgresql.Driver</jdbc.driverClassName>
+					 <jdbc.url>jdbc:postgresql://localhost/nikoniko_prod</jdbc.url>
+					 <jdbc.username>nikoniko</jdbc.username>
+					 <jdbc.password>nikoniko</jdbc.password>
+					 <hibernate.dialect>org.hibernate.dialect.PostgreSQLDialect</hibernate.dialect>
             </properties>
             <activation>
                 <property>

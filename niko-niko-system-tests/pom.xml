@@ -103,9 +103,8 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <scope>runtime</scope>
+            <groupId>postgresql</groupId>
+            <artifactId>postgresql</artifactId>
         </dependency>
 
         <!-- Run the application in embedded jetty server -->
@@ -228,9 +227,8 @@
                         </configuration>
                         <dependencies>
                             <dependency>
-                                <groupId>mysql</groupId>
-                                <artifactId>mysql-connector-java</artifactId>
-                                <version>5.1.11</version>
+                                <groupId>postgresql</groupId>
+                                <artifactId>postgresql</artifactId>
                             </dependency>
                         </dependencies>
                         <executions>

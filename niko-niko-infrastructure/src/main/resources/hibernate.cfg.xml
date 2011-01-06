@@ -7,5 +7,8 @@
         <!-- Disable the second-level cache -->
         <property name="cache.provider_class">org.hibernate.cache.NoCacheProvider</property>
         <property name="format_sql">true</property>
+        
+        <!--<mapping package="com.pyxis.nikoniko.domain"/>-->
+        <mapping class="com.pyxis.nikoniko.domain.User"/>
     </session-factory>
 </hibernate-configuration>
