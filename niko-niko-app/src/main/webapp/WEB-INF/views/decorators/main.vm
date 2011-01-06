@@ -7,16 +7,6 @@
     <title>$title</title>
     $head
 </head>
-<body class="nikoniko">
-
-<div id="wrapper">
-
-<div id="header">
-</div>
-
-<div class="content">
-	$body
-</div>
 
 Welcome to nikoniko
 

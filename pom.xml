@@ -314,8 +314,6 @@
         <test.jdbc.username>nikoniko</test.jdbc.username>
         <test.jdbc.password></test.jdbc.password>
         <test.hibernate.dialect>org.hibernate.dialect.MySQL5InnoDBDialect</test.hibernate.dialect>
-        <test.timeServer.host>localhost</test.timeServer.host>
-        <test.timeServer.port>10013</test.timeServer.port>
     </properties>
 
     <profiles>
