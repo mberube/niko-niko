@@ -8,7 +8,9 @@
     $head
 </head>
 
-Welcome to nikoniko
+<div class="content">
+	$body
+</div>
 
 <div id="footer">
     <hr/>
