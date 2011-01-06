@@ -1,3 +1,25 @@
-html {
-	height: 100%
-}	
+
+    *{  
+        margin:0;  
+        padding:0;  
+        font:bold 12px "Lucida Grande", Arial, sans-serif;  
+    }  
+    body {  
+        padding: 10px;  
+    }  
+    #status{  
+        width:50%;  
+        padding:10px;  
+        outline:none;  
+        height:36px;  
+    }  
+    .focusField{  
+        border:solid 2px #73A6FF;  
+        background:#EFF5FF;  
+        color:#000;  
+    }  
+    .idleField{  
+        background:#EEE;  
+        color: #6F6F6F;  
+        border: solid 2px #DFDFDF;  
+    }
