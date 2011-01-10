@@ -3,19 +3,16 @@
 <head>
     <meta content="text/html;charset=UTF-8" http-equiv="Content-Type"/>
     <link href="$base/stylesheets/main.css?$date.systemTime" media="screen" rel="stylesheet" type="text/css"/>
+    <script src="../../javascript/jquery-1.4.4.js"></script>
+    <script src="$base/javascript/table.jquery.js"></script>
+    <script src="$base/javascript/niko-niko.js"></script>
     <link rel="shortcut icon" href="$base/images/favicon.ico"/>
     <title>$title</title>
     $head
 </head>
-
+<body>
 <div class="content">
 	$body
-</div>
-
-<div id="footer">
-    <hr/>
-    <a href="http://www.pyxis-tech.com/en/home"><img src="$base/images/pyxis.png"/></a>
-    <span>nikoniko &copy; 2010 @</span>
 </div>
 
 </body>

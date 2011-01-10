@@ -13,12 +13,12 @@
         outline:none;  
         height:36px;  
     }  
-    .focusField{  
+    .focusAddUserBox{
         border:solid 2px #73A6FF;  
         background:#EFF5FF;  
         color:#000;  
     }  
-    .idleField{  
+    .unfocusAddUserBox{
         background:#EEE;  
         color: #6F6F6F;  
         border: solid 2px #DFDFDF;  

@@ -1,10 +1,3 @@
-<html>
-<head>
-    <title>Pyxis niko-niko Calendar</title>
-</head>
-<body>
-<div id="content">
-some content
-</div>
-</body>
-</html>
+
+<table id="calendar" />
+<input name="newUser" id="newUser" value="Enter your user name" type="text" />

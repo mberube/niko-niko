@@ -1,51 +1,83 @@
-$(document).ready(function() {  
-	
-	var newUserInputSelection = 'input[id="newUser"]:first';
-	
-	initInput($(newUserInputSelection));  
-    
-    $(newUserInputSelection).focus(function() {  
-    	focusInput(this);
-    });  
-    
-    $(newUserInputSelection).blur(function() {  
-        addUser(this.value);
-        unfocusInput(this);
-        
-    }); 
-    
-    $(newUserInputSelection).keypress(function (e) {  
-		if ((e.which && e.which == 13) || (e.keyCode && e.keyCode == 13)) {  
-			$(this).blur();     	
-	    } 
-	});  
+var addUserBoxSelector = 'input[id="newUser"]:first';
+var calendarSelector = '#calendar:first';
+
+var backend;
+var calendar;
+var addUserBox;
+
+
+$(document).ready(function() {
+
+    backend = new Backend();
+    calendar = new Calendar();
+    calendar.initialize();
+
+    addUserBox = new AddUserBox();
+    addUserBox.initialize();
+
 });
 
+function Calendar(){
 
-function initInput(jQueryInputElement){
-	jQueryInputElement.addClass("idleField"); 
+
+    this.initialize =  function(){
+          this.fill();
+    }
+
+    this.fill = function(){
+         $(calendarSelector).table({
+            data : backend.users()
+            });
+
+    }
+
 }
 
 
-function focusInput(inputElement){
-	 $(inputElement).removeClass("idleField").addClass("focusField");  
-     if (inputElement.value == inputElement.defaultValue){  
-    	 inputElement.value = '';  
-     }  
-     if(inputElement.value != inputElement.defaultValue){  
-    	 inputElement.select();  
-     }  
-}
-
-function unfocusInput(inputElement){
-	$(inputElement).removeClass("focusField").addClass("idleField");  
-	inputElement.value =  inputElement.defaultValue;  
-}
+function AddUserBox(){
 
 
-function addUser(newUsername){
-	newUsername = $.trim(newUsername);
-    if (newUsername != ''){
-        $("#users").html(newUsername);
-    } 
+    this.initialize =  function(){
+
+        $(addUserBoxSelector).addClass("unfocusAddUserBox");
+
+        $(addUserBoxSelector).focus(function() {
+             $(this).removeClass("unfocusAddUserBox").addClass("focusAddUserBox");
+             this.value = '';
+
+        });
+
+        $(addUserBoxSelector).blur(function() {
+            backend.saveUser(this.value);
+            $(this).removeClass("focusAddUserBox").addClass("unfocusAddUserBox");
+	        this.value =  this.defaultValue;
+        });
+
+        $(addUserBoxSelector).keypress(function (keyPressed) {
+            var isEnterKeyPressed =  (keyPressed.which && keyPressed.which == 13) || (keyPressed.keyCode && keyPressed.keyCode == 13);
+            if (isEnterKeyPressed) {$(this).blur();}
+        });
+
+    }
+
+
 }
+
+
+
+function Backend (){
+
+    this.innerList = new Array();
+
+    this.saveUser = function (newUsername){
+        var username = $.trim(newUsername);
+        this.innerList[this.innerList.length] = new Array(username);
+        calendar.fill();
+    }
+
+    this.users = function(){
+          return this.innerList;
+    }
+}
+
+
