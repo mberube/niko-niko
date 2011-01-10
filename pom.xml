@@ -309,19 +309,42 @@
         <context.path>/nikoniko</context.path>
         <!-- Log files go to parent/logs -->
         <log.dir>${project.basedir}/../logs</log.dir>
+        <postgresql.version>8.3-603.jdbc4</postgresql.version>
         <test.server.host>localhost</test.server.host>
         <test.server.port>8180</test.server.port>
         <test.log.file>test.log</test.log.file>
-        <test.jdbc.driverClassName>org.postgresql.Driver</test.jdbc.driverClassName>
-		  <test.jdbc.url>jdbc:postgresql://localhost/nikoniko_test</test.jdbc.url>
-        <test.jdbc.username>nikoniko</test.jdbc.username>
-        <test.jdbc.password>nikoniko</test.jdbc.password>
-        <test.hibernate.dialect>org.hibernate.dialect.PostgreSQLDialect</test.hibernate.dialect>
-        
-        <postgresql.version>8.3-603.jdbc4</postgresql.version>
     </properties>
 
     <profiles>
+        <profile>
+            <id>test</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <test.jdbc.driverClassName>org.postgresql.Driver</test.jdbc.driverClassName>
+                <test.jdbc.url>jdbc:postgresql://localhost/nikoniko_test</test.jdbc.url>
+                <test.jdbc.username>nikoniko</test.jdbc.username>
+                <test.jdbc.password>nikoniko</test.jdbc.password>
+                <test.hibernate.dialect>org.hibernate.dialect.PostgreSQLDialect</test.hibernate.dialect>
+            </properties>
+        </profile>
+        <profile>
+            <id>hudson</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+                <property>
+                    <name>BUILD_NUMBER</name>
+                </property>
+            </activation>
+            <properties>
+                <test.jdbc.driverClassName>org.postgresql.Driver</test.jdbc.driverClassName>
+                <test.jdbc.url>jdbc:postgresql://pyxtreme:5432/nikoniko_test</test.jdbc.url>
+                <test.jdbc.username>nikoniko</test.jdbc.username>
+                <test.jdbc.password>nikoniko</test.jdbc.password>
+                <test.hibernate.dialect>org.hibernate.dialect.PostgreSQLDialect</test.hibernate.dialect>
+            </properties>
+        </profile>
         <profile>
             <id>development</id>
             <activation>
