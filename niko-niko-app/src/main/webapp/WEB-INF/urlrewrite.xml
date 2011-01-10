@@ -10,6 +10,10 @@
 		<to>/javascript/$1</to>
 	</rule>
 	<rule>
+		<from>/scripts/**</from>
+		<to>/scripts/$1</to>
+	</rule>
+	<rule>
 		<from>/stylesheets/**</from>
 		<to>/stylesheets/$1</to>
 	</rule>
