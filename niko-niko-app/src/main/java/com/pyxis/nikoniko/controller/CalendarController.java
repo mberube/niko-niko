@@ -26,8 +26,8 @@ public class CalendarController {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public @ResponseBody
-    List<String> users() {
+    @ResponseBody
+    public List<String> users() {
 	Iterable<String> iter = Iterables.transform(userRepository.list(), new Function<User, String>() {
 	    public String apply(User user) {
 		return user.getUsername();
