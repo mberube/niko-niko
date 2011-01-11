@@ -55,8 +55,13 @@ function AddUserBox(){
         });
 
         $(addUserBoxSelector).keypress(function (keyPressed) {
+        	
             var isEnterKeyPressed =  (keyPressed.which && keyPressed.which == 13) || (keyPressed.keyCode && keyPressed.keyCode == 13);
-            if (isEnterKeyPressed) {$(this).blur();}
+            if (isEnterKeyPressed ) {
+            
+            	if (navigator.appName == 'Microsoft Internet Explorer')$(calendarSelector).focus();
+            	else $(this).blur();
+            }
         });
 
     }
