@@ -7,3 +7,7 @@ logs
 bin
 target
 
+#Intellij
+*.iml
+.idea
+
