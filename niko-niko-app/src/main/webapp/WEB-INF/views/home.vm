@@ -1,3 +1,5 @@
 
-<table id="calendar" />
+<table id="calendar" >
+    <th>Username</th>
+</table>
 <input name="newUser" id="newUser" value="Enter your user name" type="text" />

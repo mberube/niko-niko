@@ -26,6 +26,7 @@ function Calendar(){
 
     this.fill = function(){
          $(calendarSelector).table({
+            replace : false,
             data : backend.users()
             });
 
