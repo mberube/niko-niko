@@ -15,30 +15,30 @@ import com.pyxis.nikoniko.domain.UserRepository;
 
 @Repository
 public class HibernateUserRepository implements UserRepository {
-	private final SessionFactory sessionFactory;
-	
-	@Autowired
-	public HibernateUserRepository(SessionFactory sessionFactory) {
-		this.sessionFactory = sessionFactory;
-	}
-	
-	@Transactional
-	public void add(User user) {
-		currentSession().saveOrUpdate(user);
-	}
+    private final SessionFactory sessionFactory;
 
-	@Transactional(readOnly = true)
-	public Maybe<User> findByName(String username) {
-		return Maybe.possibly((User)currentSession().createCriteria(User.class).add(Restrictions.eq("username", username)).uniqueResult());
-	}
-	
-	@Transactional(readOnly = true)
-	@SuppressWarnings("unchecked")
-	public List<Maybe<User>> list() {
-		return currentSession().createCriteria(User.class).list();
-	}
-	
-	private Session currentSession() {
-        return sessionFactory.getCurrentSession();
+    @Autowired
+    public HibernateUserRepository(SessionFactory sessionFactory) {
+	this.sessionFactory = sessionFactory;
+    }
+
+    @Transactional
+    public void add(User user) {
+	currentSession().saveOrUpdate(user);
+    }
+
+    @Transactional(readOnly = true)
+    public Maybe<User> findByName(String username) {
+	return Maybe.possibly((User) currentSession().createCriteria(User.class).add(Restrictions.eq("username", username)).uniqueResult());
+    }
+
+    @Transactional(readOnly = true)
+    @SuppressWarnings("unchecked")
+    public List<User> list() {
+	return currentSession().createCriteria(User.class).list();
+    }
+
+    private Session currentSession() {
+	return sessionFactory.getCurrentSession();
     }
 }

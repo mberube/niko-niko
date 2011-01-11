@@ -4,6 +4,6 @@ import java.util.List;
 
 public interface UserRepository {
 	void add(User user);
-	List<Maybe<User>> list();
+	List<User> list();
 	Maybe<User> findByName(String username);
 }
