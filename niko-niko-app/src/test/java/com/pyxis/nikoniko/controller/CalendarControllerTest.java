@@ -3,11 +3,15 @@ package com.pyxis.nikoniko.controller;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.collection.IsIn.isIn;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.List;
 
 import org.junit.Test;
+import org.mockito.Mockito;
+import org.springframework.beans.TypeMismatchException;
 
 import com.google.common.collect.Lists;
 import com.pyxis.nikoniko.domain.User;
@@ -37,5 +41,11 @@ public class CalendarControllerTest {
 	List<String> userList = controller.users();
 	assertThat("should contain", "alice", isIn(userList));
 	assertThat("should contain", "bob", isIn(userList));
+    }
+
+    @Test
+    public void shouldBeAbleToAddUserToRepository() {
+	controller.addUser("bob");
+	verify(userRepository).add(new User("bob"));
     }
 }

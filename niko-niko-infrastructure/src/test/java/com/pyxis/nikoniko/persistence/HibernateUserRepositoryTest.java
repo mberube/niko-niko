@@ -23,54 +23,54 @@ public class HibernateUserRepositoryTest {
 
     @Before
     public void cleanDatabase() {
-        database.clean();
+	database.clean();
     }
 
     @After
     public void closeDatabase() {
-        database.disconnect();
+	database.disconnect();
     }
 
-	@Test
-	public void userCanBeFound() {
-		repository.add(new User("bob"));
-		
-		Maybe<User> retrievedUser = repository.findByName("bob");
-		assertEquals("bob", retrievedUser.bare().getUsername());
-	}
+    @Test
+    public void userCanBeFound() {
+	repository.add(new User("bob"));
 
-	@Test(expected=ConstraintViolationException.class)
-	public void usernameCannotBeNull() {
-		repository.add(new User(null));
-	}
+	Maybe<User> retrievedUser = repository.findByName("bob");
+	assertEquals("bob", retrievedUser.bare().getUsername());
+    }
 
-	@Test(expected=ConstraintViolationException.class)
-	public void userCannotBeEmpty() {
-		repository.add(new User(""));
-	}
+    @Test(expected = ConstraintViolationException.class)
+    public void usernameCannotBeNull() {
+	repository.add(new User(null));
+    }
 
-	@Test(expected=org.hibernate.exception.ConstraintViolationException.class)
-	public void userIsUnique() {
-		repository.add(new User("bob"));
-		repository.add(new User("bob"));
-	}
+    @Test(expected = ConstraintViolationException.class)
+    public void userCannotBeEmpty() {
+	repository.add(new User(""));
+    }
 
-	@Test 
-	public void emptyUserList() {
-		assertTrue("user repo should be empty", repository.list().isEmpty());
-	}
-	
-	@Test 
-	public void listSingleUser() {
-		repository.add(new User("bob"));
-		assertEquals(1, repository.list().size());
-	}
-	
-	@Test 
-	public void listTwoUsers() {
-		repository.add(new User("alice"));
-		repository.add(new User("bob"));
-		assertEquals(2, repository.list().size());
-	}
+    @Test(expected = org.hibernate.exception.ConstraintViolationException.class)
+    public void userIsUnique() {
+	repository.add(new User("bob"));
+	repository.add(new User("bob"));
+    }
+
+    @Test
+    public void emptyUserList() {
+	assertTrue("user repo should be empty", repository.list().isEmpty());
+    }
+
+    @Test
+    public void listSingleUser() {
+	repository.add(new User("bob"));
+	assertEquals(1, repository.list().size());
+    }
+
+    @Test
+    public void listTwoUsers() {
+	repository.add(new User("alice"));
+	repository.add(new User("bob"));
+	assertEquals(2, repository.list().size());
+    }
 
 }
