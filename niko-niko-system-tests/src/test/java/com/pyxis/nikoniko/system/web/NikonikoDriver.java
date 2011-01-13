@@ -58,5 +58,9 @@ public class NikonikoDriver {
         serverDriverFactory.disposeServerDriver(serverDriver);
     }
 
+    public void hasInputText(String text) {
+	homePage.hasInputText(text);
+    }
+
 
 }

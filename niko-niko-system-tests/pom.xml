@@ -253,8 +253,6 @@
                             <systemPropertyVariables>
                                 <!-- Uncomment to change webdriver and jetty runtime options -->
                                 <!--<webdriver.class>org.openqa.selenium.chrome.ChromeDriver</webdriver.class>-->
-                                <timeServer.host>${test.timeServer.host}</timeServer.host>
-                                <timeServer.port>${test.timeServer.port}</timeServer.port>
                                 <server.port>${test.server.port}</server.port>
                                 <context.path>${context.path}</context.path>
                             </systemPropertyVariables>
