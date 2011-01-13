@@ -4,33 +4,73 @@ var calendarSelector = '#calendar:first';
 var calendar;
 var addUserBox;
 
+
 $(document).ready(function() {
 	calendar = new Calendar();
-	calendar.initialize();
+
 
 	addUserBox = new AddUserBox();
 	addUserBox.initialize();
+
 
 });
 
 function Calendar() {
 
-	this.initialize = function() {
-		this.fill();
+    var slickGrid;
+
+	this.constructor = function() {
+
+
+        var columns = [
+        {id:"username", name:"Username", field:"username" },
+        {id:"day1", name:"Mon 1 jan", field:"day1"},
+        {id:"day2", name:"Tues 2 jan", field:"day2"},
+        {id:"day3", name:"Wen 3 jan", field:"day3"},
+        {id:"day4", name:"Thurs 4 jan", field:"day4"},
+        {id:"day5", name:"Fri 5 jan", field:"day5"},
+        {id:"day6", name:"Mon 6 jan", field:"day6"},
+        {id:"day7", name:"Tues 7 jan", field:"day7"}
+
+        ];
+
+        var options = {
+            enableCellNavigation: false,
+            autoHeight: true,
+            enableColumnReorder: false
+        };
+
+        slickGrid = new Slick.Grid($("#myGrid"), [], columns, options);
+
+        this.fill();
+
+
 	}
+
+
+
 
 	this.fill = function() {
 		$.getJSON('calendar/users', "", function(users) {
-			$(calendarSelector).table({
-				replace : false,
 
-				// transform array into array of arrays
-				data : users.map(function(user) {
-					return [ user ];
-				})
-			});
+			var datafromServer = users.map(function(user) {
+					return [ user ];  });
+            var data = [];
+            for (var i=0; i < datafromServer.length; i++) {
+
+                var d = (data[i] = {});
+
+				d["username"] = datafromServer[i][0];
+
+			}
+
+            slickGrid.setData(data,true);
+            slickGrid.resizeCanvas();
+            slickGrid.render();
 		});
 	}
+
+    this.constructor();
 }
 
 function AddUserBox() {
