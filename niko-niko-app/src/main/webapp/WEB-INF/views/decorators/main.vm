@@ -3,9 +3,18 @@
 <head>
     <meta content="text/html;charset=UTF-8" http-equiv="Content-Type"/>
     <link href="$base/stylesheets/main.css?$date.systemTime" media="screen" rel="stylesheet" type="text/css"/>
+
+    <link rel="stylesheet" href="$base/scripts/plugins/slickgrid/slick.grid.css" type="text/css" media="screen" charset="utf-8" />
+    <link rel="stylesheet" href="$base/scripts/plugins/slickgrid/css/smoothness/jquery-ui-1.8.5.custom.css" type="text/css" media="screen" charset="utf-8" />
+    <link rel="stylesheet" href="$base/scripts/plugins/slickgrid/css/niko-niko.css" type="text/css" media="screen" charset="utf-8" />
+
     <script type="text/javascript" src="$base/scripts/jquery-1.4.4.js"></script>
-    <script type="text/javascript" src="$base/scripts/table.jquery.js"></script>
     <script type="text/javascript" src="$base/scripts/niko-niko.js"></script>
+
+    <script language="JavaScript" src="$base/scripts/plugins/slickgrid/lib/jquery-1.4.3.min.js"></script>
+    <script language="JavaScript" src="$base/scripts/plugins/slickgrid/lib/jquery.event.drag-2.0.min.js"></script>
+    <script language="JavaScript" src="$base/scripts/plugins/slickgrid/slick.grid.js"></script>
+
     <link rel="shortcut icon" href="$base/images/favicon.ico"/>
     <title>$title</title>
     $head
