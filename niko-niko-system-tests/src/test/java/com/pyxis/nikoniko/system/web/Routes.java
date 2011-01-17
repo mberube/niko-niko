@@ -8,14 +8,14 @@ import static java.lang.String.format;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.pyxis.nikoniko.system.web.page.HomePage;
+import com.pyxis.nikoniko.system.web.page.CalendarPage;
 
 public final class Routes {
 
     private static Map<Class<?>, String> urlMappings = new HashMap<Class<?>, String>();
 
     static {
-        urlMappings.put(HomePage.class, "/");
+        urlMappings.put(CalendarPage.class, "/");
     }
 
     private Routes() {

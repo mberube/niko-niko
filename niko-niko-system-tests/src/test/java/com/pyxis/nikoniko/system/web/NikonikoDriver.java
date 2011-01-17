@@ -8,7 +8,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.objogate.wl.UnsynchronizedProber;
 import com.objogate.wl.web.AsyncWebDriver;
-import com.pyxis.nikoniko.system.web.page.HomePage;
+import com.pyxis.nikoniko.system.web.page.CalendarPage;
 import com.pyxis.nikoniko.system.web.serverdriver.ServerDriver;
 import com.pyxis.nikoniko.system.web.serverdriver.ServerDriverFactory;
 import com.pyxis.nikoniko.system.web.webdriver.WebDriverFactory;
@@ -21,7 +21,7 @@ public class NikonikoDriver {
     private WebDriver webdriver;
     private AsyncWebDriver browser;
 
-    private HomePage homePage;
+    private CalendarPage calendarPage;
 //    private CalendarPage calendarPage;
 
     public void start() throws Exception {
@@ -45,12 +45,11 @@ public class NikonikoDriver {
     }
 
     private void createPageDrivers() {
-        homePage = new HomePage(browser);
-//        calendarPage = new CalendarPage(browser);
+        calendarPage = new CalendarPage(browser);
     }
 
     private void startBrowser() {
-        browser.navigate().to(urlFor(HomePage.class));
+        browser.navigate().to(urlFor(CalendarPage.class));
     }
 
     public void stop() throws Exception {
@@ -58,9 +57,15 @@ public class NikonikoDriver {
         serverDriverFactory.disposeServerDriver(serverDriver);
     }
 
-    public void hasInputText(String text) {
-	homePage.hasInputText(text);
+    public void addUser(String user) {
+	calendarPage.addUser(user);
     }
 
+    public void showsEmptyCalendar() {
+	calendarPage.showsEmptyCalendar();
+    }
 
+    public void showsUserInCalendar(String user) {
+	calendarPage.showsUserInCalendar(user);
+    }
 }
