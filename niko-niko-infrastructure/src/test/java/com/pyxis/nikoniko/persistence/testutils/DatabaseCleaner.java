@@ -3,12 +3,13 @@ package com.pyxis.nikoniko.persistence.testutils;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import com.pyxis.nikoniko.domain.Mood;
 import com.pyxis.nikoniko.domain.User;
 
 public class DatabaseCleaner {
 
     private static final Class<?>[] ENTITY_TYPES = {
-            User.class
+	Mood.class, User.class
     };
     private static final String[] SEQUENCE_NAMES = {
     };

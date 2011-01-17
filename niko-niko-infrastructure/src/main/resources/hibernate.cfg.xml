@@ -10,5 +10,6 @@
         
         <!--<mapping package="com.pyxis.nikoniko.domain"/>-->
         <mapping class="com.pyxis.nikoniko.domain.User"/>
+        <mapping class="com.pyxis.nikoniko.domain.Mood"/>
     </session-factory>
 </hibernate-configuration>
