@@ -4,7 +4,7 @@
       var NikoNikoEditor = {
         SmileyFormatter :function  (row, cell, value, columnDef, dataContext) {
 
-            return "<img src='" + GetSmileySrc(value)+ "' class='miniSmiley'>";
+            return "<img src='" + GetSmileySrc(value)+ "' class='mood-image'>";
         } ,
 
          GetSmileySrc :function  ( value) {
@@ -16,27 +16,43 @@
         } ,
 
 
-        SmileyCellEditor2 : function(args) {
+        SmileyCellEditor : function(args) {
             var $smileyImg, $picker;
             var defaultValue;
-            var scope = this;
 
             this.init = function() {
-                $smileyImg = $("<img class='miniSmiley'>");
+                $smileyImg = $("<img class='mood-image'>");
 
                 $smileyImg.appendTo(args.container);
 
-                $picker = $("<span class='editor-percentcomplete-picker' />").appendTo(args.container);
+                $picker = $("<span class='editor-mood-picker' />").appendTo(args.container);
 
-                $picker.append("<div class='editor-percentcomplete-helper'><div class='editor-percentcomplete-wrapper'><div class='editor-percentcomplete-slider' /><div class='editor-percentcomplete-buttons' /></div></div>");
+                $picker.append("<div class='editor-mood-helper'>" +
+                                    "<div class='editor-mood-wrapper'>" +
 
-                $picker.find(".editor-percentcomplete-buttons").append("<button val=1>Unhappy</button><br/><button val=2>Normal</button><br/><button val=3>Happy</button>");
+                                        "<div class='editor-mood-content' >" +
+                                                "What were your mood ?<br/><br/>" +
+                                            "<div class='editor-mood-buttons'>" +
+                                                "<input id='unhappy' value='1' type='image'  src='images/bad.gif' name='mood' class='mood-image' /><label for='unhappy'> Unhappy</label><br/>" +
+                                                "<input id='normal' value='2' type='image' src='images/bof.gif' name='mood' class='mood-image' /><label for='normal'> Normal</label><br/>" +
+                                                "<input id='happy' value='3' type='image' src='images/good.gif' name='mood' class='mood-image' /><label for='happy'> Happy</label><br/>"  +
+                                                "<input id='dontknow' value='0' type='image' src='images/interrogation.png' name='mood' class='mood-image'  /><label for='dontknow'> Don't know</label><br/>" +
+                                                "<input id='nothere' value='4' type='image' src='images/x.png' name='mood' class='mood-image' /><label for='nothere'> Not here</label><br/>" +
 
-                $picker.find(".editor-percentcomplete-buttons button").bind("click", function(e) {
-                    $smileyImg.val($(this).attr("val"));
-                    $smileyImg.attr('src',GetSmileySrc($(this).attr("val")));
+                                            "</div>" +
+                                         "</div>" +
+                                    "</div>" +
+                                "</div>");
 
 
+                $picker.find(".editor-mood-content input[name='mood']").bind("click", function(e) {
+                    $smileyImg.val($(this).attr("value"));
+                    $smileyImg.attr('src',GetSmileySrc($(this).attr("value")));
+                    $picker.hide();
+                })
+
+                $smileyImg.click(function(){
+                    $picker.show();
                 })
             };
 

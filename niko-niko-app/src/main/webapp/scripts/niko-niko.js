@@ -31,7 +31,7 @@ function Calendar() {
             width:120
             },
 
-        {id:"day1", name:"Mon 1 jan", field:"day1",formatter:SmileyFormatter, editor:SmileyCellEditor2},
+        {id:"day1", name:"Mon 1 jan", field:"day1",formatter:SmileyFormatter, editor:SmileyCellEditor},
         {id:"day2", name:"Tues 2 jan", field:"day2"},
         {id:"day3", name:"Wen 3 jan", field:"day3"},
         {id:"day4", name:"Thurs 4 jan", field:"day4"},
@@ -45,6 +45,7 @@ function Calendar() {
             enableCellNavigation: false,
             autoHeight: true,
             editable: true,
+            enableAutoTooltips:false,
 			enableCellNavigation: true,
             enableColumnReorder: false
         };

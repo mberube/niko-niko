@@ -1,4 +1,4 @@
-@import url('slick-default-theme.css');
+@import url("slick-default-theme.css");
 
 * {
     font-family: arial;
@@ -38,7 +38,7 @@ li {
 	border: 1px solid gray;
 	border-bottom: 0;
 	border-top: 0;
-	background: url('../images/header-bg.gif') repeat-x center top;
+	background: url("../images/header-bg.gif") repeat-x center top;
 	color: black;
 	height: 24px;
 	line-height: 24px;
@@ -161,7 +161,7 @@ input.editor-percentcomplete {
     display: inline-block;
     width: 16px;
     height: 100%;
-    background: url("../images/pencil.gif") no-repeat center center;	
+    background: url("../images/pencil.gif") no-repeat center center;
 	overflow: visible;
 	z-index: 1000;
 	float: right;
@@ -229,5 +229,77 @@ input.editor-checkbox {
 	padding: 0;
 	border: 0;
 }
+
+
+ /*Extension plugin Slickgrid*/
+.mood-image {
+    width:15px;
+    height:15px;
+    float:left;
+}
+
+
+
+/* moodCellEditor */
+
+.editor-mood-buttons {
+
+    padding-left: 9px;
+    line-height:20px;
+}
+
+.editor-mood-picker {
+	position: relative;
+    display: inline-block;
+    width: 16px;
+    height: 100%;
+    background: url("../images/pencil.gif") no-repeat center center;
+	overflow: visible;
+	z-index: 1000;
+	float: right;
+}
+
+.editor-mood-helper {
+    border: 0 solid gray;
+    position: absolute;
+    top: -2px;
+    left: -9px;
+    background: url("../images/editor-helper-bg.gif") no-repeat top left;
+
+    padding-left: 9px;
+    height: 140px;
+
+	overflow: visible;
+}
+
+
+.editor-mood-wrapper {
+	background:beige;
+    width:150px;
+
+	height:138px;
+	border:1px solid gray;
+	border-left:0;
+}
+
+.editor-mood-content {
+    font : normal 10px "Lucida Grande",Arial,sans-serif;
+    padding-left: 15px;
+    padding-top: 5px;
+}
+
+.editor-mood-content button {
+	width: 80px;
+    padding-left: 10px;
+}
+
+label {
+   padding-left: 9px;
+
+ }
+
+
+
+
 
 
