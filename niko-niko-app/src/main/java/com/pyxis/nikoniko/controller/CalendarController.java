@@ -2,8 +2,11 @@ package com.pyxis.nikoniko.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -31,7 +34,7 @@ public class CalendarController {
 	this.calendarRepository = calendarRepository;
     }
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(value="/users", method = RequestMethod.GET)
     @ResponseBody
     public List<String> users() {
 	Iterable<String> iter = Iterables.transform(userRepository.list(), new Function<User, String>() {
@@ -49,6 +52,8 @@ public class CalendarController {
 	return "OK";
     }
     
+    @RequestMapping(value="/mood", method = RequestMethod.POST)
+    @ResponseBody
     public String setMood(@RequestParam("user") String username, @RequestParam("mood") long timestamp, @RequestParam("mood") int mood) {
 	Maybe<User> user = userRepository.findByName(username);
 	if(!user.exists()) {

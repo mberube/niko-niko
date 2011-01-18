@@ -23,7 +23,7 @@
     <context:component-scan base-package="com.pyxis.nikoniko.controller"/>
     <context:component-scan base-package="com.pyxis.nikoniko.domain"/>
 
-<!-- Apply to all handler mappings -->
+	<!-- Apply to all handler mappings -->
     <mvc:interceptors>
         <bean id="openSessionInView" class="org.springframework.orm.hibernate3.support.OpenSessionInViewInterceptor">
             <property name="sessionFactory" ref="sessionFactory"/>
