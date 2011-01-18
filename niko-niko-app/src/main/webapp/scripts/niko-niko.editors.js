@@ -1,15 +1,19 @@
 (function($) {
 
+
       var NikoNikoEditor = {
         SmileyFormatter :function  (row, cell, value, columnDef, dataContext) {
+
+            return GetSmileyImage(value);
+        } ,
+
+        GetSmileyImage :function  ( value) {
             if(value == 1) { return "<img src='images/bad.gif' class='miniSmiley'>"}
             if(value == 2) { return "<img src='images/bof.gif' class='miniSmiley'>"}
             if(value == 3) { return "<img src='images/good.gif' class='miniSmiley'>"}
-            if(value == 4) { return "x"}
-            return "?";
+            if(value == 4) { return "<img src='images/x.png' class='miniSmiley'>"}
+            return "<img src='images/interrogation.png' class='miniSmiley'>";
         } ,
-
-
 
 
         SmileyCellEditor2 : function(args) {
@@ -18,7 +22,7 @@
             var scope = this;
 
             this.init = function() {
-                $input = $("<img src='images/good.gif' class='miniSmiley' > ");
+                $input = $(GetSmileyImage(defaultValue));
 
                 $input.appendTo(args.container);
 
@@ -31,7 +35,7 @@
 
                 $picker.find(".editor-percentcomplete-buttons button").bind("click", function(e) {
                     $input.val($(this).attr("val"));
-                    $picker.find(".editor-percentcomplete-slider").slider("value", $(this).attr("val"));
+
                 })
             };
 
