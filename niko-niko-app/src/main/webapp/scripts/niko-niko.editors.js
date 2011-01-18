@@ -4,57 +4,58 @@
       var NikoNikoEditor = {
         SmileyFormatter :function  (row, cell, value, columnDef, dataContext) {
 
-            return GetSmileyImage(value);
+            return "<img src='" + GetSmileySrc(value)+ "' class='miniSmiley'>";
         } ,
 
-        GetSmileyImage :function  ( value) {
-            if(value == 1) { return "<img src='images/bad.gif' class='miniSmiley'>"}
-            if(value == 2) { return "<img src='images/bof.gif' class='miniSmiley'>"}
-            if(value == 3) { return "<img src='images/good.gif' class='miniSmiley'>"}
-            if(value == 4) { return "<img src='images/x.png' class='miniSmiley'>"}
-            return "<img src='images/interrogation.png' class='miniSmiley'>";
+         GetSmileySrc :function  ( value) {
+            if(value == 1) { return 'images/bad.gif'}
+            if(value == 2) { return 'images/bof.gif'}
+            if(value == 3) { return 'images/good.gif'}
+            if(value == 4) { return 'images/x.png'}
+            return 'images/interrogation.png' ;
         } ,
 
 
         SmileyCellEditor2 : function(args) {
-            var $input, $picker;
+            var $smileyImg, $picker;
             var defaultValue;
             var scope = this;
 
             this.init = function() {
-                $input = $(GetSmileyImage(defaultValue));
+                $smileyImg = $("<img class='miniSmiley'>");
 
-                $input.appendTo(args.container);
+                $smileyImg.appendTo(args.container);
 
                 $picker = $("<span class='editor-percentcomplete-picker' />").appendTo(args.container);
+
                 $picker.append("<div class='editor-percentcomplete-helper'><div class='editor-percentcomplete-wrapper'><div class='editor-percentcomplete-slider' /><div class='editor-percentcomplete-buttons' /></div></div>");
 
                 $picker.find(".editor-percentcomplete-buttons").append("<button val=1>Unhappy</button><br/><button val=2>Normal</button><br/><button val=3>Happy</button>");
 
-                $input.focus().select();
-
                 $picker.find(".editor-percentcomplete-buttons button").bind("click", function(e) {
-                    $input.val($(this).attr("val"));
+                    $smileyImg.val($(this).attr("val"));
+                    $smileyImg.attr('src',GetSmileySrc($(this).attr("val")));
+
 
                 })
             };
 
             this.destroy = function() {
-                $input.remove();
+                $smileyImg.remove();
                 $picker.remove();
             };
 
             this.focus = function() {
-                $input.focus();
+
             };
 
             this.loadValue = function(item) {
-                $input.val(defaultValue = item[args.column.field]);
-                $input.select();
+                $smileyImg.val(defaultValue = item[args.column.field]);
+                $smileyImg.attr('src',GetSmileySrc(item[args.column.field]));
             };
 
             this.serializeValue = function() {
-                return parseInt($input.val(),10) || 0;
+                return parseInt($smileyImg.val()) || 0;
             };
 
             this.applyValue = function(item,state) {
@@ -62,16 +63,10 @@
             };
 
             this.isValueChanged = function() {
-                return (!($input.val() == "" && defaultValue == null)) && ((parseInt($input.val(),10) || 0) != defaultValue);
+                return (!($smileyImg.val() == "" && defaultValue == null)) && ((parseInt($smileyImg.val()) || 0) != defaultValue);
             };
 
             this.validate = function() {
-                if (isNaN(parseInt($input.val(),10)))
-                    return {
-                        valid: false,
-                        msg: "Please enter a valid positive number"
-                    };
-
                 return {
                     valid: true,
                     msg: null
