@@ -23,3 +23,15 @@
         color: #6F6F6F;  
         border: solid 2px #DFDFDF;  
     }
+
+
+    .miniSmiley,.miniSmileySelected {
+        width:15px;
+        height:15px;
+        float:left;
+    }
+
+    .miniSmileySelected{
+        border-bottom:1px dotted black;
+
+    }

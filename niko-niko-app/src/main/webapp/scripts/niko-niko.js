@@ -15,6 +15,8 @@ $(document).ready(function() {
 
 });
 
+
+
 function Calendar() {
 
     var slickGrid;
@@ -23,8 +25,13 @@ function Calendar() {
 
 
         var columns = [
-        {id:"username", name:"Username", field:"username" },
-        {id:"day1", name:"Mon 1 jan", field:"day1"},
+        {id:"username",
+            name:"Username",
+            field:"username",
+            width:120
+            },
+
+        {id:"day1", name:"Mon 1 jan", field:"day1",formatter:SmileyFormatter, editor:SmileyCellEditor2},
         {id:"day2", name:"Tues 2 jan", field:"day2"},
         {id:"day3", name:"Wen 3 jan", field:"day3"},
         {id:"day4", name:"Thurs 4 jan", field:"day4"},
@@ -37,6 +44,8 @@ function Calendar() {
         var options = {
             enableCellNavigation: false,
             autoHeight: true,
+            editable: true,
+			enableCellNavigation: true,
             enableColumnReorder: false
         };
 
@@ -61,6 +70,7 @@ function Calendar() {
                 var d = (data[i] = {});
 
 				d["username"] = datafromServer[i][0];
+                d["day1"] = 0;
 
 			}
 

@@ -6,7 +6,7 @@
 		<title>Pyxis Niko-Niko Calendar </title>
 	</head>
 	<body>
-    	<div id="myGrid" style="width:640px;"></div>
+    	<div id="myGrid" style="width:680px;"></div>
         <input name="newUser" id="newUser" value="Enter your user name" type="text" />
 	</body>
 </html>
