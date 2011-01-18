@@ -23,14 +23,14 @@
     <context:component-scan base-package="com.pyxis.nikoniko.controller"/>
     <context:component-scan base-package="com.pyxis.nikoniko.domain"/>
 
+<!-- Apply to all handler mappings -->
     <mvc:interceptors>
-        <!-- Apply to all handler mappings -->
         <bean id="openSessionInView" class="org.springframework.orm.hibernate3.support.OpenSessionInViewInterceptor">
             <property name="sessionFactory" ref="sessionFactory"/>
             <property name="singleSession" value="false"/>
         </bean>
     </mvc:interceptors>
-
+    
     <bean class="org.springframework.web.servlet.view.velocity.VelocityViewResolver">
         <property name="cache" value="true"/>
         <property name="prefix" value=""/>

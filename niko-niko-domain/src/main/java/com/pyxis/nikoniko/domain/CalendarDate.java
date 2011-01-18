@@ -6,6 +6,8 @@ import javax.persistence.Embeddable;
 import org.hibernate.annotations.Type;
 import org.joda.time.LocalDate;
 
+import com.google.common.base.Objects;
+
 @Embeddable
 public class CalendarDate {
     @Column
@@ -20,7 +22,27 @@ public class CalendarDate {
 	this.calendarDay = date;
     }
 
+    public CalendarDate(long timestamp) {
+	this(new LocalDate(timestamp));
+    }
+
     public LocalDate getCalendarDay() {
 	return calendarDay;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+	if(!(obj instanceof CalendarDate)) {
+	    return false;
+	}
+	CalendarDate that = (CalendarDate)obj;
+	return Objects.equal(this.calendarDay, that.calendarDay);
+    }
+
+    @Override
+    public int hashCode() {
+	return Objects.hashCode(calendarDay);
+    }
+    
+    
 }
