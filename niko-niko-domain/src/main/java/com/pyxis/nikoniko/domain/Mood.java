@@ -2,6 +2,8 @@ package com.pyxis.nikoniko.domain;
 
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -24,9 +26,14 @@ public class Mood {
     @Embedded
     private CalendarDate calendarDay;
     
-    private Smiley value;
+    private MoodType value;
     
-    public Mood(User user, CalendarDate calendarDay, Smiley value) {
+    @SuppressWarnings("unused")
+    private Mood() {
+	// for hibernate
+    }
+    
+    public Mood(User user, CalendarDate calendarDay, MoodType value) {
 	this.user = user;
 	this.calendarDay = calendarDay;
 	this.value = value;
@@ -40,7 +47,11 @@ public class Mood {
         return calendarDay;
     }
 
-    public Smiley getValue() {
+    public MoodType getValue() {
         return value;
+    }
+
+    public void setValue(MoodType moodType) {
+	this.value = moodType;
     }
 }

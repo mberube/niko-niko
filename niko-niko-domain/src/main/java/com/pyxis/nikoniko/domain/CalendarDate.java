@@ -43,6 +43,12 @@ public class CalendarDate {
     public int hashCode() {
 	return Objects.hashCode(calendarDay);
     }
-    
-    
+
+    public CalendarDate aWeekAgo() {
+	return new CalendarDate(calendarDay.minusDays(7));
+    }
+
+    public CalendarDate yesterday() {
+	return new CalendarDate(calendarDay.minusDays(1));
+    }
 }

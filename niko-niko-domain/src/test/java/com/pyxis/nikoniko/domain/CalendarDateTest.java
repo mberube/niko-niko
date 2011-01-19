@@ -38,4 +38,18 @@ public class CalendarDateTest {
 	long timestamp = 123556;
 	assertThat("dates should not be equal on different days", new CalendarDate(timestamp), not(equalTo(new CalendarDate(timestamp+24*60*60*1000))));
     }
+    
+    @Test
+    public void canRetrieveDateFromYesterday() {
+	CalendarDate today = new CalendarDate();
+	CalendarDate yesterday = today.yesterday();
+	org.hamcrest.MatcherAssert.assertThat("", today.getCalendarDay().toDateTimeAtStartOfDay().getMillis()-yesterday.getCalendarDay().toDateTimeAtStartOfDay().getMillis() == 24*60*60*1000);
+    }
+    
+    @Test
+    public void canRetrieveDateFromAWeekAgo() {
+	CalendarDate today = new CalendarDate();
+	CalendarDate aWeekAgo = today.aWeekAgo();
+	org.hamcrest.MatcherAssert.assertThat("", today.getCalendarDay().toDateTimeAtStartOfDay().getMillis()-aWeekAgo.getCalendarDay().toDateTimeAtStartOfDay().getMillis() == 7*24*60*60*1000);
+    }
 }

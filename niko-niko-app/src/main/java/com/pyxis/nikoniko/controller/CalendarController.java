@@ -15,10 +15,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.pyxis.nikoniko.controller.transfer.NikoCale;
+import com.pyxis.nikoniko.controller.transfer.RowData;
 import com.pyxis.nikoniko.domain.CalendarDate;
 import com.pyxis.nikoniko.domain.CalendarRepository;
 import com.pyxis.nikoniko.domain.Maybe;
-import com.pyxis.nikoniko.domain.Smiley;
+import com.pyxis.nikoniko.domain.MoodType;
 import com.pyxis.nikoniko.domain.User;
 import com.pyxis.nikoniko.domain.UserRepository;
 
@@ -34,7 +36,7 @@ public class CalendarController {
 	this.calendarRepository = calendarRepository;
     }
 
-    @RequestMapping(value="/users", method = RequestMethod.GET)
+    @RequestMapping(value = "/users", method = RequestMethod.GET)
     @ResponseBody
     public List<String> users() {
 	Iterable<String> iter = Iterables.transform(userRepository.list(), new Function<User, String>() {
@@ -51,16 +53,39 @@ public class CalendarController {
 	userRepository.add(new User(username));
 	return "OK";
     }
-    
-    @RequestMapping(value="/mood", method = RequestMethod.POST)
+
+    @RequestMapping(value = "/mood", method = RequestMethod.POST)
     @ResponseBody
     public String setMood(@RequestParam("user") String username, @RequestParam("mood") long timestamp, @RequestParam("mood") int mood) {
 	Maybe<User> user = userRepository.findByName(username);
-	if(!user.exists()) {
+	if (!user.exists()) {
 	    throw new IllegalArgumentException("User not found");
 	}
-	Smiley smiley = Smiley.valueFromInt(mood);
+	MoodType smiley = MoodType.valueFromInt(mood);
 	calendarRepository.setMood(user.bare(), new CalendarDate(timestamp), smiley);
 	return "OK";
+    }
+
+    @RequestMapping(value = "/week", method = RequestMethod.GET)
+    @ResponseBody
+    public NikoCale getCalendar() {
+	List<User> users = userRepository.list();
+	List<RowData> rows = Lists.newArrayList();
+	
+
+	for (User user : users) {
+	    List<MoodType> moods = calendarRepository.getMoodsFor(user);
+	    
+	    Iterable<Integer> transform = Iterables.transform(moods, new Function<MoodType, Integer>() {
+		public Integer apply(MoodType type) {
+	            return type.ordinal();
+                }
+	    });
+	    
+	    List<Integer> moodsAsIn = Lists.newArrayList(transform);
+	    RowData row = new RowData(user.getUsername(), moodsAsIn);
+	    rows.add(row);
+	}
+	return new NikoCale(rows);
     }
 }

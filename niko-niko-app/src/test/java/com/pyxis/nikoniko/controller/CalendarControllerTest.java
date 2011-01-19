@@ -14,7 +14,7 @@ import com.google.common.collect.Lists;
 import com.pyxis.nikoniko.domain.CalendarDate;
 import com.pyxis.nikoniko.domain.CalendarRepository;
 import com.pyxis.nikoniko.domain.Maybe;
-import com.pyxis.nikoniko.domain.Smiley;
+import com.pyxis.nikoniko.domain.MoodType;
 import com.pyxis.nikoniko.domain.User;
 import com.pyxis.nikoniko.domain.UserRepository;
 
@@ -55,8 +55,8 @@ public class CalendarControllerTest {
     public void shouldBeAbleToSetMood() {
 	User bob = new User("bob");
 	when(userRepository.findByName("bob")).thenReturn(Maybe.some(bob));
-	controller.setMood("bob", 0, 0);
+	controller.setMood("bob", 0, MoodType.HAPPY.ordinal());
 	
-	verify(calendarRepository).setMood(bob, new CalendarDate(0), Smiley.HAPPY);
+	verify(calendarRepository).setMood(bob, new CalendarDate(0), MoodType.HAPPY);
     }
 }
