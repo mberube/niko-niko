@@ -8,11 +8,11 @@
         } ,
 
          GetSmileySrc :function  ( value) {
-            if(value == 1) { return 'images/bad.gif'}
-            if(value == 2) { return 'images/bof.gif'}
-            if(value == 3) { return 'images/good.gif'}
-            if(value == 4) { return 'images/x.png'}
-            return 'images/interrogation.png' ;
+            if(value == 1) { return 'images/unhappy.png'}
+            if(value == 2) { return 'images/normal.png'}
+            if(value == 3) { return 'images/happy.png'}
+            if(value == 4) { return 'images/nothere.png'}
+            return 'images/dontknow.png' ;
         } ,
 
 
@@ -29,17 +29,13 @@
 
                 $picker.append("<div class='editor-mood-helper'>" +
                                     "<div class='editor-mood-wrapper'>" +
-
                                         "<div class='editor-mood-content' >" +
-                                                "What were your mood ?<br/><br/>" +
-                                            "<div class='editor-mood-buttons'>" +
-                                                "<input id='unhappy' value='1' type='image'  src='images/bad.gif' name='mood' class='mood-image' /><label for='unhappy'> Unhappy</label><br/>" +
-                                                "<input id='normal' value='2' type='image' src='images/bof.gif' name='mood' class='mood-image' /><label for='normal'> Normal</label><br/>" +
-                                                "<input id='happy' value='3' type='image' src='images/good.gif' name='mood' class='mood-image' /><label for='happy'> Happy</label><br/>"  +
-                                                "<input id='dontknow' value='0' type='image' src='images/interrogation.png' name='mood' class='mood-image'  /><label for='dontknow'> Don't know</label><br/>" +
-                                                "<input id='nothere' value='4' type='image' src='images/x.png' name='mood' class='mood-image' /><label for='nothere'> Not here</label><br/>" +
-
-                                            "</div>" +
+                                                "<div class='editor-mood-question'>What were your mood ?</div>" +
+                                                "<div class='editor-mood-button'><input id='happy' value='3' type='image' src='images/happy.png' name='mood' class='mood-image' /><label for='happy'> Happy</label></div>"  +
+                                                "<div class='editor-mood-button'><input id='normal' value='2' type='image' src='images/normal.png' name='mood' class='mood-image' /><label for='normal'> Normal</label></div>" +
+                                                "<div class='editor-mood-button'><input id='unhappy' value='1' type='image'  src='images/unhappy.png' name='mood' class='mood-image' /><label for='unhappy'> Unhappy</label></div>" +
+                                                "<div class='editor-mood-button'><input id='dontknow' value='0' type='image' src='images/dontknow.png' name='mood' class='mood-image'  /><label for='dontknow'> Don't know</label></div>" +
+                                                "<div class='editor-mood-button'><input id='nothere' value='4' type='image' src='images/nothere.png' name='mood' class='mood-image' /><label for='nothere'> Not here</label></div>" +
                                          "</div>" +
                                     "</div>" +
                                 "</div>");

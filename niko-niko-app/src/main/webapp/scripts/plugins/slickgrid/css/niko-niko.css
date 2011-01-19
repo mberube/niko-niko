@@ -233,8 +233,7 @@ input.editor-checkbox {
 
  /*Extension plugin Slickgrid*/
 .mood-image {
-    width:15px;
-    height:15px;
+
     float:left;
 }
 
@@ -242,11 +241,6 @@ input.editor-checkbox {
 
 /* moodCellEditor */
 
-.editor-mood-buttons {
-
-    padding-left: 9px;
-    line-height:20px;
-}
 
 .editor-mood-picker {
 	position: relative;
@@ -274,7 +268,7 @@ input.editor-checkbox {
 
 
 .editor-mood-wrapper {
-	background:beige;
+	background:#ffffff;
     width:150px;
 
 	height:138px;
@@ -284,19 +278,34 @@ input.editor-checkbox {
 
 .editor-mood-content {
     font : normal 10px "Lucida Grande",Arial,sans-serif;
+}
+
+.editor-mood-question {
+    font : normal 10px "Lucida Grande",Arial,sans-serif;
     padding-left: 15px;
     padding-top: 5px;
+    padding-bottom:10px;
 }
 
-.editor-mood-content button {
-	width: 80px;
-    padding-left: 10px;
+.editor-mood-button {
+
+    padding-left: 25px;
+    line-height:21px;
 }
 
-label {
-   padding-left: 9px;
+.editor-mood-button label {
+   padding-left: 10px;
 
  }
+
+.editor-mood-button:hover{
+     background:#d9dfeb;
+}
+
+
+
+
+
 
 
 

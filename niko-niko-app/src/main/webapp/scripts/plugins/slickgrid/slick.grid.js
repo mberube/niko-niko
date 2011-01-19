@@ -353,7 +353,7 @@ if (!jQuery.fn.drag) {
                 .empty()
                 .attr("tabIndex",0)
                 .attr("hideFocus",true)
-                .css("overflow","hidden")
+                .css("overflow","visible")  //patch niko-niko
                 .css("outline",0)
                 .addClass(uid)
                 .addClass("ui-widget");
@@ -361,6 +361,7 @@ if (!jQuery.fn.drag) {
             // set up a positioning container if needed
             if (!/relative|absolute|fixed/.test($container.css("position")))
                 $container.css("position","relative");
+
 
             $headerScroller = $("<div class='slick-header ui-state-default' style='overflow:hidden;position:relative;' />").appendTo($container);
             $headers = $("<div class='slick-header-columns' style='width:100000px; left:-10000px' />").appendTo($headerScroller);
@@ -372,7 +373,8 @@ if (!jQuery.fn.drag) {
                 $secondaryHeaderScroller.hide();
             }
 
-            $viewport = $("<div class='slick-viewport' tabIndex='0' hideFocus style='width:100%;overflow-x:auto;outline:0;position:relative;overflow-y:auto;'>").appendTo($container);
+            //patch niko-niko overflow:visible  instead of auto
+            $viewport = $("<div class='slick-viewport' tabIndex='0' hideFocus style='width:100%;overflow-x:visible;outline:0;position:relative;overflow-y:visible;'>").appendTo($container);
             $canvas = $("<div class='grid-canvas' tabIndex='0' hideFocus />").appendTo($viewport);
 
             // header columns and cells may have different padding/border skewing width calculations (box-sizing, hello?)
