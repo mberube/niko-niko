@@ -11,17 +11,19 @@ import java.util.List;
 import org.junit.Test;
 
 import com.google.common.collect.Lists;
-import com.pyxis.nikoniko.domain.CalendarDate;
-import com.pyxis.nikoniko.domain.CalendarRepository;
 import com.pyxis.nikoniko.domain.Maybe;
-import com.pyxis.nikoniko.domain.MoodType;
 import com.pyxis.nikoniko.domain.User;
 import com.pyxis.nikoniko.domain.UserRepository;
+import com.pyxis.nikoniko.domain.calendar.CalendarDate;
+import com.pyxis.nikoniko.domain.calendar.CalendarRepository;
+import com.pyxis.nikoniko.domain.calendar.MoodType;
+import com.pyxis.nikoniko.view.CalendarViewService;
 
 public class CalendarControllerTest {
     UserRepository userRepository = mock(UserRepository.class);
     CalendarRepository calendarRepository = mock(CalendarRepository.class);
-    CalendarController controller = new CalendarController(userRepository, calendarRepository);
+    CalendarViewService calendarView = mock(CalendarViewService.class);
+    CalendarController controller = new CalendarController(userRepository, calendarRepository, calendarView);
 
     @Test
     public void shouldReturnEmptyListIfNoUsersAreFound() {

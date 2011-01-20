@@ -8,15 +8,18 @@ import static org.hamcrest.collection.IsIterableWithSize.iterableWithSize;
 import java.util.List;
 
 import org.hibernate.SessionFactory;
+import org.joda.time.DateTimeUtils;
+import org.joda.time.LocalDate;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.pyxis.nikoniko.domain.CalendarDate;
-import com.pyxis.nikoniko.domain.CalendarRepository;
-import com.pyxis.nikoniko.domain.MoodType;
 import com.pyxis.nikoniko.domain.User;
 import com.pyxis.nikoniko.domain.UserRepository;
+import com.pyxis.nikoniko.domain.calendar.CalendarDate;
+import com.pyxis.nikoniko.domain.calendar.CalendarRepository;
+import com.pyxis.nikoniko.domain.calendar.DayOfWeek;
+import com.pyxis.nikoniko.domain.calendar.MoodType;
 import com.pyxis.nikoniko.persistence.testutils.Database;
 
 public class HibernateCalendarRepositoryTest {
@@ -28,6 +31,7 @@ public class HibernateCalendarRepositoryTest {
     @Before
     public void cleanDatabase() {
 	database.clean();
+	DateTimeUtils.setCurrentMillisSystem();
     }
 
     @After
@@ -96,6 +100,21 @@ public class HibernateCalendarRepositoryTest {
 	
 	assertThat("mood size should be 7", iterableWithSize(7).matches(moods));
 	assertThat(MoodType.HAPPY, equalTo(moods.get(6)));
+    }
+    
+    @Test
+    public void retrieveDaysForLastWeek() {
+	long expectedTimestamp = new LocalDate(2011, 1, 19).toDateTimeAtStartOfDay().getMillis();
+	DateTimeUtils.setCurrentMillisFixed(expectedTimestamp);
+	List<CalendarDate> daysForLastWeek = repository.getDaysForLastWeek();
+	assertThat(7, equalTo(daysForLastWeek.size()));
+	assertThat(DayOfWeek.WEDNESDAY.localized(), equalTo(daysForLastWeek.get(0).getDayOfTheWeek()));
+	assertThat(DayOfWeek.TUESDAY.localized(), equalTo(daysForLastWeek.get(1).getDayOfTheWeek()));
+	assertThat(DayOfWeek.MONDAY.localized(), equalTo(daysForLastWeek.get(2).getDayOfTheWeek()));
+	assertThat(DayOfWeek.SUNDAY.localized(), equalTo(daysForLastWeek.get(3).getDayOfTheWeek()));
+	assertThat(DayOfWeek.SATURDAY.localized(), equalTo(daysForLastWeek.get(4).getDayOfTheWeek()));
+	assertThat(DayOfWeek.FRIDAY.localized(), equalTo(daysForLastWeek.get(5).getDayOfTheWeek()));
+	assertThat(DayOfWeek.THURSDAY.localized(), equalTo(daysForLastWeek.get(6).getDayOfTheWeek()));
     }
     
     private CalendarDate sixDaysAgo() {

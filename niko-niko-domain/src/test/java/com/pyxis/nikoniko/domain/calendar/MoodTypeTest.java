@@ -1,8 +1,10 @@
-package com.pyxis.nikoniko.domain;
+package com.pyxis.nikoniko.domain.calendar;
 
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
+
+import com.pyxis.nikoniko.domain.calendar.MoodType;
 
 public class MoodTypeTest {
     @Test

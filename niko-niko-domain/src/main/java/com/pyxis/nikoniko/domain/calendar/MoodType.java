@@ -1,4 +1,4 @@
-package com.pyxis.nikoniko.domain;
+package com.pyxis.nikoniko.domain.calendar;
 
 public enum MoodType {
     UNKNOWN, HAPPY, NEUTRAL, MAD, ABSENT;

@@ -10,6 +10,6 @@
         
         <!--<mapping package="com.pyxis.nikoniko.domain"/>-->
         <mapping class="com.pyxis.nikoniko.domain.User"/>
-        <mapping class="com.pyxis.nikoniko.domain.Mood"/>
+        <mapping class="com.pyxis.nikoniko.domain.calendar.Mood"/>
     </session-factory>
 </hibernate-configuration>

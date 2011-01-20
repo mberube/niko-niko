@@ -3,8 +3,8 @@ package com.pyxis.nikoniko.persistence.testutils;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import com.pyxis.nikoniko.domain.Mood;
 import com.pyxis.nikoniko.domain.User;
+import com.pyxis.nikoniko.domain.calendar.Mood;
 
 public class DatabaseCleaner {
 

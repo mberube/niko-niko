@@ -14,11 +14,11 @@ import org.springframework.transaction.annotation.Transactional;
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import com.pyxis.nikoniko.domain.CalendarDate;
-import com.pyxis.nikoniko.domain.CalendarRepository;
-import com.pyxis.nikoniko.domain.Mood;
-import com.pyxis.nikoniko.domain.MoodType;
 import com.pyxis.nikoniko.domain.User;
+import com.pyxis.nikoniko.domain.calendar.CalendarDate;
+import com.pyxis.nikoniko.domain.calendar.CalendarRepository;
+import com.pyxis.nikoniko.domain.calendar.Mood;
+import com.pyxis.nikoniko.domain.calendar.MoodType;
 
 @Repository
 public class HibernateCalendarRepository implements CalendarRepository {
@@ -81,4 +81,13 @@ public class HibernateCalendarRepository implements CalendarRepository {
 	return sessionFactory.getCurrentSession();
     }
 
+    public List<CalendarDate> getDaysForLastWeek() {
+	List<CalendarDate> days = Lists.newArrayList();
+	CalendarDate day = new CalendarDate();
+	for(int i=0; i<7; i++) {
+	    days.add(day);
+	    day = day.yesterday();
+	}
+	return days;
+    }
 }

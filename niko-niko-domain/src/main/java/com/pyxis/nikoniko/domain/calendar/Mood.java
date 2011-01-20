@@ -1,15 +1,15 @@
-package com.pyxis.nikoniko.domain;
+package com.pyxis.nikoniko.domain.calendar;
 
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
+
+import com.pyxis.nikoniko.domain.User;
 
 @Entity
 public class Mood {

@@ -1,4 +1,4 @@
-package com.pyxis.nikoniko.controller.transfer;
+package com.pyxis.nikoniko.view.transfer;
 
 import java.util.List;
 

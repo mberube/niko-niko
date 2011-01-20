@@ -2,11 +2,8 @@ package com.pyxis.nikoniko.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,25 +12,27 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import com.pyxis.nikoniko.controller.transfer.NikoCale;
-import com.pyxis.nikoniko.controller.transfer.RowData;
-import com.pyxis.nikoniko.domain.CalendarDate;
-import com.pyxis.nikoniko.domain.CalendarRepository;
 import com.pyxis.nikoniko.domain.Maybe;
-import com.pyxis.nikoniko.domain.MoodType;
 import com.pyxis.nikoniko.domain.User;
 import com.pyxis.nikoniko.domain.UserRepository;
+import com.pyxis.nikoniko.domain.calendar.CalendarDate;
+import com.pyxis.nikoniko.domain.calendar.CalendarRepository;
+import com.pyxis.nikoniko.domain.calendar.MoodType;
+import com.pyxis.nikoniko.view.CalendarViewService;
+import com.pyxis.nikoniko.view.transfer.CalendarView;
 
 @Controller
 @RequestMapping(value = "/calendar")
 public class CalendarController {
     private final UserRepository userRepository;
     private final CalendarRepository calendarRepository;
+    private final CalendarViewService calendarService;
 
     @Autowired
-    public CalendarController(UserRepository userRepository, CalendarRepository calendarRepository) {
+    public CalendarController(UserRepository userRepository, CalendarRepository calendarRepository, CalendarViewService calendarService) {
 	this.userRepository = userRepository;
 	this.calendarRepository = calendarRepository;
+	this.calendarService = calendarService;
     }
 
     @RequestMapping(value = "/users", method = RequestMethod.GET)
@@ -68,24 +67,7 @@ public class CalendarController {
 
     @RequestMapping(value = "/week", method = RequestMethod.GET)
     @ResponseBody
-    public NikoCale getCalendar() {
-	List<User> users = userRepository.list();
-	List<RowData> rows = Lists.newArrayList();
-	
-
-	for (User user : users) {
-	    List<MoodType> moods = calendarRepository.getMoodsFor(user);
-	    
-	    Iterable<Integer> transform = Iterables.transform(moods, new Function<MoodType, Integer>() {
-		public Integer apply(MoodType type) {
-	            return type.ordinal();
-                }
-	    });
-	    
-	    List<Integer> moodsAsIn = Lists.newArrayList(transform);
-	    RowData row = new RowData(user.getUsername(), moodsAsIn);
-	    rows.add(row);
-	}
-	return new NikoCale(rows);
+    public CalendarView getCalendar() {
+	return calendarService.getWeeklyCalendar();
     }
 }
