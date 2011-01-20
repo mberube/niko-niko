@@ -22,9 +22,7 @@ public class CalendarDateTest {
 	LocalDate reference = new LocalDate(2009, 3, 18);
 	CalendarDate date = new CalendarDate(reference.toDateTimeAtCurrentTime().getMillis());
 	
-	assertEquals(reference.getYear(), date.getCalendarDay().getYear());
-	assertEquals(reference.getDayOfMonth(), date.getCalendarDay().getDayOfMonth());
-	assertEquals(reference.getMonthOfYear(), date.getCalendarDay().getMonthOfYear());
+	assertEquals("2009/03/18", date.getFullDateAsString());
     }
     
     @Test

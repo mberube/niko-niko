@@ -31,10 +31,6 @@ public class CalendarDate {
 	this(new LocalDate(year, month, day));
     }
 
-    public LocalDate getCalendarDay() {
-	return calendarDay;
-    }
-
     @Override
     public boolean equals(Object obj) {
 	if (!(obj instanceof CalendarDate)) {
@@ -58,7 +54,7 @@ public class CalendarDate {
     }
 
     public long getMillisAtStartOfDay() {
-	return getCalendarDay().toDateTimeAtStartOfDay().getMillis();
+	return calendarDay.toDateTimeAtStartOfDay().getMillis();
     }
 
     public String getDayOfTheWeek() {
@@ -86,9 +82,13 @@ public class CalendarDate {
 	return normalize(calendarDay.getMonthOfYear()) + "/" + normalize(calendarDay.getDayOfMonth());
     }
 
+    public String getFullDateAsString() {
+	return normalize(calendarDay.getYear()) + "/" + normalize(calendarDay.getMonthOfYear()) + "/" + normalize(calendarDay.getDayOfMonth());
+    }
+
     private String normalize(int number) {
 	String value = Integer.toString(number);
-	if(value.length() == 1) {
+	if (value.length() == 1) {
 	    value = "0" + value;
 	}
 	return value;
