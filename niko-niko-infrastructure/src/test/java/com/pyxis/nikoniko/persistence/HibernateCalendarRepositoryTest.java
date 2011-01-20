@@ -31,6 +31,10 @@ public class HibernateCalendarRepositoryTest {
     @Before
     public void cleanDatabase() {
 	database.clean();
+    }
+    
+    @Before
+    public void resetTime() {
 	DateTimeUtils.setCurrentMillisSystem();
     }
 
