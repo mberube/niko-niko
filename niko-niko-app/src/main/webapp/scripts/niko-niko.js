@@ -25,19 +25,14 @@ function Calendar() {
 
 
         var columns = [
-        {id:"username",
-            name:"Username",
-            field:"username",
-            width:120
-            },
-
-        {id:"day1", name:"Mon 1 jan", field:"day1",formatter:SmileyFormatter, editor:SmileyCellEditor},
-        {id:"day2", name:"Tues 2 jan", field:"day2"},
-        {id:"day3", name:"Wen 3 jan", field:"day3"},
-        {id:"day4", name:"Thurs 4 jan", field:"day4"},
-        {id:"day5", name:"Fri 5 jan", field:"day5"},
-        {id:"day6", name:"Mon 6 jan", field:"day6"},
-        {id:"day7", name:"Tues 7 jan", field:"day7"}
+        {id:"username",name:"Username",field:"username",width:120},
+        {id:"day1",  field:"day1",formatter:SmileyFormatter, editor:SmileyCellEditor},
+        {id:"day2",  field:"day2",formatter:SmileyFormatter, editor:SmileyCellEditor},
+        {id:"day3",  field:"day3",formatter:SmileyFormatter, editor:SmileyCellEditor},
+        {id:"day4",  field:"day4",formatter:SmileyFormatter, editor:SmileyCellEditor},
+        {id:"day5",  field:"day5",formatter:SmileyFormatter, editor:SmileyCellEditor},
+        {id:"day6", field:"day6",formatter:SmileyFormatter, editor:SmileyCellEditor},
+        {id:"day7",  field:"day7",formatter:SmileyFormatter, editor:SmileyCellEditor}
 
         ];
 
@@ -52,29 +47,44 @@ function Calendar() {
 
         slickGrid = new Slick.Grid($("#myGrid"), [], columns, options);
 
+        slickGrid.onCellChange = function(row,cell,dataContext) {
+         var username = dataContext.username;
+         var date = this.getColumns()[cell].name;
+         var dateId = this.getColumns()[cell].id;
+         var mood = dataContext[dateId];
+         $.post('calendar/mood', {user: username,date:date,mood:mood});
+        }
+
         this.fill();
 
 
 	}
 
 
-
-
 	this.fill = function() {
-		$.getJSON('calendar/users', "", function(users) {
+		$.getJSON('calendar/week', "", function(week) {
 
-			var datafromServer = users.map(function(user) {
-					return [ user ];  });
             var data = [];
-            for (var i=0; i < datafromServer.length; i++) {
+            for (var i=0; i < week.rows.length; i++) {
 
                 var d = (data[i] = {});
 
-				d["username"] = datafromServer[i][0];
-                d["day1"] = 0;
+				d["username"] = week.rows[i]["username"];
+                d["day1"] = week.rows[i]["moods"][0];
+                d["day2"] = week.rows[i]["moods"][1];
+                d["day3"] = week.rows[i]["moods"][2];
+                d["day4"] = week.rows[i]["moods"][0];
+                d["day5"] = week.rows[i]["moods"][0];
+                d["day6"] = week.rows[i]["moods"][0];
+                d["day7"] = week.rows[i]["moods"][0];
 
 			}
+            var columns = slickGrid.getColumns();
+            for (var i=0; i < week.columnTitles.length; i++) {
+                columns[i+1]["name"] =  week.columnTitles[i]["date"];
+			}
 
+            slickGrid.setColumns(columns)
             slickGrid.setData(data,true);
             slickGrid.resizeCanvas();
             slickGrid.render();
